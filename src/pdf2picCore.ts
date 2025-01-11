@@ -56,6 +56,12 @@ export function pdf2picCore(source: string, data: string | Buffer, options = def
     return results;
   };
 
+  convert.info = async () => {
+    const buffer = await convertToBuffer(source, data);
+    const pagesToConvert = await getPages(gm, bufferToStream(buffer));
+    return pagesToConvert;
+  };
+
   convert.setOptions = (): void => setGMOptions(gm, options);
 
   convert.setGMClass = (gmClass: string | boolean): void => {
